@@ -33,10 +33,10 @@ class AuthController {
         return res.status(400).json({ error: "Este email já está em uso!" });
       }
 
-      /* const userNicknameExists = await UserModel.findByNickname(nickname);
+      const userNicknameExists = await UserModel.findByNickname(nickname);
       if (userNickanameExists) {
         return res.status(400).json({ error: "Este nickname já está em uso!" });
-      }*/
+      
 
       // Hash da senha
       const hashedPassword = await bcrypt.hash(password, 10);
@@ -48,7 +48,8 @@ class AuthController {
         email,
         password: hashedPassword,
       };
-
+    }
+    
       // Criar usuário
       const user = await UserModel.create(data);
 
