@@ -23,8 +23,7 @@ class AuthController {
       if (!name || !nickname || !email || !password) {
         return res
           .status(400)
-          .json({ error: "Os campos nome, email e senha são obrigatórios!" 
-          });
+          .json({ error: "Os campos nome, email e senha são obrigatórios!" });
       }
 
       // Verificar se o usuário já existe
@@ -34,9 +33,9 @@ class AuthController {
       }
 
       const userNicknameExists = await UserModel.findByNickname(nickname);
-      if (userNickanameExists) {
+      if (userNicknameExists) {
         return res.status(400).json({ error: "Este nickname já está em uso!" });
-      
+      } 
 
       // Hash da senha
       const hashedPassword = await bcrypt.hash(password, 10);
@@ -48,8 +47,7 @@ class AuthController {
         email,
         password: hashedPassword,
       };
-    }
-    
+
       // Criar usuário
       const user = await UserModel.create(data);
 
